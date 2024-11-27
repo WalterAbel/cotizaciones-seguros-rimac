@@ -15,7 +15,7 @@ provider:
         - arn:aws:dynamodb:us-west-2:390403884591:table/SeguroTable2
 
 functions:
-  hello:
+  Cotizacion:
     handler: src/handler.calcular
     events:
       - httpApi:
@@ -35,3 +35,9 @@ resources:
             KeySchema:
               - AttributeName: id
                 KeyType: HASH          
+
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-typescript
+ 
