@@ -1,0 +1,37 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: walter9809
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: reto-seguro-rimac
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: us-west-2
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+      Resource:
+        - arn:aws:dynamodb:us-west-2:390403884591:table/SeguroTable2
+
+functions:
+  hello:
+    handler: src/handler.calcular
+    events:
+      - httpApi:
+          path: /salud/calcularCotizacion
+          method: post
+
+resources:
+      Resources:
+        usersTable:
+          Type: AWS::DynamoDB::Table
+          Properties:
+            TableName: SeguroTable2
+            BillingMode: PAY_PER_REQUEST
+            AttributeDefinitions:
+              - AttributeName: id
+                AttributeType: S
+            KeySchema:
+              - AttributeName: id
+                KeyType: HASH          

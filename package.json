@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "aws-sdk": "^2.1692.0",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.146",
+    "@types/node": "^22.10.0",
+    "serverless-plugin-typescript": "^2.1.5",
+    "typescript": "^5.7.2"
+  }
+}
