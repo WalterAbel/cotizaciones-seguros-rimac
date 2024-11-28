@@ -1,6 +1,6 @@
-import AWS from "aws-sdk";
+import { Inject, Injectable } from "@nestjs/common";
+import { CotizacionInterfaceRepository } from "../infrastructure/cotizacionInterface";
 
-const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 type Payload = {
     edad: number;
@@ -20,11 +20,14 @@ type TarifasBase = {
     [plan: string]: { [genero: string]: number };
 }
 
-class CotizacionService {
+@Injectable()
+export class CotizacionDomainService {
     private tarifasBase: TarifasBase;
     private ajusteEdad: RangoEdad[];
 
-    constructor() {
+    constructor(
+        @Inject("CotizacionRepository") private readonly cotizacionRepository: CotizacionInterfaceRepository
+    ) {
 
         this.tarifasBase = {
             HIJOS: { M: 100, F: 120 },
@@ -40,7 +43,7 @@ class CotizacionService {
         ];
     }
 
-    async calcularCotizacion(payload: Payload) {
+    public async calcularCotizacion(payload: Payload):Promise<object> {
         const { edad, genero, plan, tipoSeguro, id } = payload;
 
         // Calculamos tarifa base
@@ -62,18 +65,16 @@ class CotizacionService {
 
         // Guardamos en DynamoDB
         try {
-            await dynamodb.put({
-                TableName: 'SeguroTable2',
-                Item: {
-                    id,  // Asegúrate de incluir el id como clave primaria
-                    edad,
-                    genero,
-                    plan,
-                    tipoSeguro,
-                    cotizacion,
-                    fechaInicioCobertura: fechaInicioCoberturaStr,
-                }
-            }).promise();
+            await this.cotizacionRepository.guardarCotizacion({
+                id,
+                edad,
+                genero,
+                plan,
+                tipoSeguro,
+                cotizacion,
+                fechaInicioCobertura: fechaInicioCoberturaStr,
+            })
+
 
             return {
                 cotizacion,
@@ -87,4 +88,3 @@ class CotizacionService {
     }
 }
 
-export default CotizacionService;

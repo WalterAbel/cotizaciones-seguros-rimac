@@ -16,7 +16,7 @@ provider:
 
 functions:
   Cotizacion:
-    handler: src/handler.calcular
+    handler: src/infrastructure/aws/handler.calcular
     events:
       - httpApi:
           path: /salud/calcularCotizacion

@@ -1,10 +1,14 @@
-import CotizacionService from "../servicio/CotizacionService";
 import { v4 } from "uuid";
+import { CotizacionDomainService } from "../domain/service/CotizacionDomainService";
+import { Injectable } from "@nestjs/common";
 
-const cotizacionService = new CotizacionService();
+@Injectable()
+export class CotizacionApplicationService {
 
-class CotizacionController {
-    static async calcularCotizacion(event: { body: string }): Promise<{ statusCode: number; body: string }> {
+    constructor(private readonly cotizacionDomainService: CotizacionDomainService) {
+
+    }
+    public async calcularCotizacion(event: { body: string }): Promise<{ statusCode: number; body: string }> {
         try {
             // Parseamos el cuerpo de la solicitud
             const { edad, genero, plan, tipoSeguro } = JSON.parse(event.body).payload;
@@ -26,7 +30,7 @@ class CotizacionController {
 
             // Llamamos al servicio de cotización con el payload
             console.log("Llamando al servicio con el siguiente payload:", payload);
-            const result = await cotizacionService.calcularCotizacion(payload);
+            const result = await this.cotizacionDomainService.calcularCotizacion(payload);
 
             // Retornamos la respuesta exitosa con la cotización calculada
             return {
@@ -65,5 +69,3 @@ class CotizacionController {
         }
     }
 }
-
-export default CotizacionController;

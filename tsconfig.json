@@ -1,14 +1,19 @@
 {
-    "compilerOptions": {
-      "target": "ES6",                         // Compatibilidad con Node.js
-      "module": "CommonJS",                    // Formato de módulos para Lambda
-      "outDir": ".build",                     // Carpeta de salida para los archivos compilados
-      "rootDir": "./",                       // Carpeta de los archivos fuente
-      "esModuleInterop": true,                  // Compatibilidad con módulos ES
-      "strict": true,                           // Habilitar reglas estrictas
-      "skipLibCheck": true                      // Evitar problemas con dependencias
-    },
-    "include": ["src/**/*"],                    // Incluir todos los archivos .ts
-    "exclude": ["node_modules"]                 // Excluir node_modules
-  }
-  
+  "compilerOptions": {
+    "target": "ES6", // Compatibilidad con Node.js
+    "module": "CommonJS", // Formato de módulos para Lambda
+    "outDir": ".build", // Carpeta de salida para los archivos compilados
+    "rootDir": "./", // Carpeta de los archivos fuente
+    "esModuleInterop": true, // Compatibilidad con módulos ES
+    "strict": true, // Habilitar reglas estrictas
+    "skipLibCheck": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+  },
+  "include": [
+    "src/**/*"
+  ], // Incluir todos los archivos .ts
+  "exclude": [
+    "node_modules"
+  ] // Excluir node_modules
+}
