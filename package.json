@@ -1,4 +1,4 @@
-{ 
+{
   "name": "reto-tecnico-seguros",
   "version": "1.0.0",
   "description": "<!-- title: 'AWS Simple HTTP Endpoint example in NodeJS' description: 'This template demonstrates how to make a simple HTTP API with Node.js running on AWS Lambda and API Gateway using the Serverless Framework.' layout: Doc framework: v4 platform: AWS language: nodeJS authorLink: 'https://github.com/serverless' authorName: 'Serverless, Inc.' authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4' -->",
@@ -12,19 +12,17 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  
   "dependencies": {
-    "aws-sdk": "^2.1692.0",
-    "uuid": "^8.3.2",
+    "aws-sdk": "2.1692.0",
+    "uuid": "8.3.2",
     "@middy/core": "4.7.0",
     "@nestjs/common": "10.3.7",
     "@nestjs/core": "10.3.7",
     "@nestjs/schedule": "4.0.0"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.145",
+    "@types/aws-lambda": "8.10.145",
     "@types/node": "20.10.4",
-    "uuid": "^8.3.2",
     "serverless-plugin-typescript": "2.1.5",
     "serverless-offline": "13.3.3",
     "serverless": "3.38.0",

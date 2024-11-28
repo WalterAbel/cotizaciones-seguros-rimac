@@ -41,3 +41,9 @@ plugins:
   - serverless-offline
   - serverless-plugin-typescript
  
+
+package:
+  individually: true
+  patterns:
+    - src/**
+    - node_modules/** 
